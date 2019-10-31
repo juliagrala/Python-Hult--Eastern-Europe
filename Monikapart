@@ -1,3 +1,37 @@
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GINI'].describe())
+print('\n')
+print(worldData_df['GINI'][worldData_df['GINI']=='World'])
+
+teamData_df['GINI']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GINI'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GINI'])
+plt.show()
+
+
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['GINI'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('GINI')
+plt.show()
+
+worldData_df['GINI'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('GINI')
+plt.show()
+
+
+
 ########################################################################################################################################
                                                             #Data Exploration
 ########################################################################################################################################
