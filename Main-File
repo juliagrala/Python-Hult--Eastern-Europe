@@ -120,6 +120,16 @@ plt.show()
 teamData_df.hist(column=['GDP_AgriForFish'])
 plt.show()
 
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['AgeDependencyTotal'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+worldData_df['AgeDependencyTotal'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Total')
+plt.show()
 
 ########################################################################################################################################
                                                             #Correlation
