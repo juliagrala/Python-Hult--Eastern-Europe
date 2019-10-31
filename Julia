@@ -1,1 +1,122 @@
 
+#Describe + simple histogram and bar plot
+print(teamData_df['HIV'].describe())
+print('\n')
+print(worldData_df['HIV'][worldData_df['CountryName']=='World'])
+
+teamData_df['HIV']
+
+plt.bar(x=teamData_df.index, height=teamData_df['HIV'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['HIV'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['Undernourishment'].describe())
+print('\n')
+print(worldData_df['Undernourishment'][worldData_df['CountryName']=='World'])
+
+teamData_df['Undernourishment']
+
+plt.bar(x=teamData_df.index, height=teamData_df['Undernourishment'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['Undernourishment'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['PopulationRural'].describe())
+print('\n')
+print(worldData_df['PopulationRural'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationRural']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationRural'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationRural'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDP_Services'].describe())
+print('\n')
+print(worldData_df['GDP_Services'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP_Services']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP_Services'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP_Services'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['SurfaceArea'].describe())
+print('\n')
+print(worldData_df['SurfaceArea'][worldData_df['CountryName']=='World'])
+
+teamData_df['SurfaceArea']
+
+plt.bar(x=teamData_df.index, height=teamData_df['SurfaceArea'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['SurfaceArea'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['TaxRevenue'].describe())
+print('\n')
+print(worldData_df['TaxRevenue'][worldData_df['CountryName']=='World'])
+
+teamData_df['TaxRevenue']
+
+plt.bar(x=teamData_df.index, height=teamData_df['TaxRevenue'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['TaxRevenue'])
+plt.show()
+
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['PopulationUrban'].describe())
+print('\n')
+print(worldData_df['PopulationUrban'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationUrban']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationUrban'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationUrban'])
+plt.show()
+
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['PopulationUrbanGrowth'].describe())
+print('\n')
+print(worldData_df['PopulationUrbanGrowth'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationUrbanGrowth']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationUrbanGrowth'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationUrbanGrowth'])
+plt.show()
+
