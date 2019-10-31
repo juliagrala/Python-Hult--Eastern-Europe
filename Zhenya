@@ -1,0 +1,60 @@
+#Describe + simple histogram and bar plot/ PopulationTotal
+print(teamData_df['PopulationTotal'].describe())
+print('\n')
+print(worldData_df['PopulationTotal'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationTotal']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationTotal'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationTotal'])
+plt.show()
+
+#Describe + simple histogram and bar plot/ MaleProportion
+
+maleProportion_df['MaleProportion']=pd.DataFrame(teamData_df['PopulationMale']/teamData_df['PopulationTotal'])
+
+print(maleProportion_df)
+
+print(teamData_df['PopulationMale'].describe())
+print('\n')
+print(worldData_df['PopulationMale'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationMale']
+
+plt.bar(x=teamData_df.index, height=maleProportion_df['MaleProportion'])
+plt.xticks(rotation=90)
+plt.show()
+
+maleProportion_df.hist(column=['MaleProportion'])
+plt.show()
+
+#Describe + simple histogram and bar plot / PopulationSlums
+print(teamData_df['PopulationSlums'].describe())
+print('\n')
+print(worldData_df['PopulationSlums'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationSlums']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationSlums'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationSlums'])
+plt.show()
+
+#Describe + simple histogram and bar plot / PopulationLargestCity
+print(teamData_df['PopulationLargestCity'].describe())
+print('\n')
+print(worldData_df['PopulationLargestCity'][worldData_df['CountryName']=='World'])
+
+teamData_df['PopulationLargestCity']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationLargestCity'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PopulationLargestCity'])
+plt.show()
