@@ -1,0 +1,182 @@
+#Describe + simple histogram and bar plot
+print(teamData_df['IncomeFourth'].describe())
+print('\n')
+print(worldData_df['IncomeFourth'][worldData_df['CountryName']=='World'])
+
+teamData_df['IncomeFourth']
+
+plt.bar(x=teamData_df.index, height=teamData_df['IncomeFourth'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['IncomeFourth'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['IncomeFifth'].describe())
+print('\n')
+print(worldData_df['IncomeFifth'][worldData_df['CountryName']=='World'])
+
+teamData_df['IncomeFifth']
+
+plt.bar(x=teamData_df.index, height=teamData_df['IncomeFifth'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['IncomeFifth'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['IncomeFirst'].describe())
+print('\n')
+print(worldData_df['IncomeFirst'][worldData_df['CountryName']=='World'])
+
+teamData_df['IncomeFirst']
+
+plt.bar(x=teamData_df.index, height=teamData_df['IncomeFirst'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['IncomeFirst'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['IncomeSecond'].describe())
+print('\n')
+print(worldData_df['IncomeSecond'][worldData_df['CountryName']=='World'])
+
+teamData_df['IncomeSecond']
+
+plt.bar(x=teamData_df.index, height=teamData_df['IncomeSecond'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['IncomeSecond'])
+plt.show()
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['IncomeThird'].describe())
+print('\n')
+print(worldData_df['IncomeThird'][worldData_df['CountryName']=='World'])
+
+teamData_df['IncomeThird']
+
+plt.bar(x=teamData_df.index, height=teamData_df['IncomeThird'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['IncomeThird'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDP_Industry'].describe())
+print('\n')
+print(worldData_df['GDP_Industry'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP_Industry']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP_Industry'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP_Industry'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['LifeExpectancy'].describe())
+print('\n')
+print(worldData_df['LifeExpectancy'][worldData_df['CountryName']=='World'])
+
+teamData_df['LifeExpectancy']
+
+plt.bar(x=teamData_df.index, height=teamData_df['LifeExpectancy'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['LifeExpectancy'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['LiteracyAdult'].describe())
+print('\n')
+print(worldData_df['LiteracyAdult'][worldData_df['CountryName']=='World'])
+
+teamData_df['LiteracyAdult']
+
+plt.bar(x=teamData_df.index, height=teamData_df['LiteracyAdult'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['LiteracyAdult'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['LiteracyYouth'].describe())
+print('\n')
+print(worldData_df['LiteracyYouth'][worldData_df['CountryName']=='World'])
+
+teamData_df['LiteracyYouth']
+
+plt.bar(x=teamData_df.index, height=teamData_df['LiteracyYouth'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['LiteracyYouth'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDP_Merchandise'].describe())
+print('\n')
+print(worldData_df['GDP_Merchandise'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP_Merchandise']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP_Merchandise'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP_Merchandise'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['ExpendMilitary'].describe())
+print('\n')
+print(worldData_df['ExpendMilitary'][worldData_df['CountryName']=='World'])
+
+teamData_df['ExpendMilitary']
+
+plt.bar(x=teamData_df.index, height=teamData_df['ExpendMilitary'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['ExpendMilitary'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['MobileSubs'].describe())
+print('\n')
+print(worldData_df['MobileSubs'][worldData_df['CountryName']=='World'])
+
+teamData_df['MobileSubs']
+
+plt.bar(x=teamData_df.index, height=teamData_df['MobileSubs'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['MobileSubs'])
+plt.show()
+
+#Describe + simple histogram and bar plot
+print(teamData_df['PovertyByHealthcare'].describe())
+print('\n')
+print(worldData_df['PovertyByHealthcare'][worldData_df['CountryName']=='World'])
+
+teamData_df['PovertyByHealthcare']
+
+plt.bar(x=teamData_df.index, height=teamData_df['PovertyByHealthcare'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['PovertyByHealthcare'])
+plt.show()
