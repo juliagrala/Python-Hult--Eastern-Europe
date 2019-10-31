@@ -1,4 +1,7 @@
-#import data from Excel
+########################################################################################################################################
+                                                            import data from Excel
+########################################################################################################################################
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -93,3 +96,42 @@ newColumns=[#CountryCode,
 worldData_df.columns = newColumns
 
 teamData_df=worldData_df[worldData_df['Cool Name']=='Skids & Mudflap']
+
+
+########################################################################################################################################
+                                                            Data Exploration
+########################################################################################################################################
+
+#Simple describe and comparison with World
+print(teamData_df['ElectricityAccessTotal'].describe())
+worldData_df['ElectricityAccessTotal'][worldData_df['CountryName']=='World']
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDP_AgriForFish'].describe())
+print('\n')
+print(worldData_df['GDP_AgriForFish'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP_AgriForFish']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP_AgriForFish'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP_AgriForFish'])
+plt.show()
+
+
+########################################################################################################################################
+                                                            Correlation
+########################################################################################################################################
+
+#Big correlation matrix
+correlationData_df=teamData_df.dropna(axis=1, thresh=1).corr().dropna(thresh=1).dropna(axis=1, thresh=1)
+f = plt.figure(figsize=(19, 15))
+plt.matshow(correlationData_df, fignum=f.number)
+plt.xticks(range(correlationData_df.shape[1]), correlationData_df.columns, fontsize=14, rotation=90)
+plt.yticks(range(correlationData_df.shape[1]), correlationData_df.columns, fontsize=14)
+plt.grid(True)
+cb = plt.colorbar()
+cb.ax.tick_params(labelsize=14)
+
