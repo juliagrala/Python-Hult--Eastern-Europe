@@ -1,0 +1,114 @@
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDPGrowth'].describe())
+print('\n')
+print(worldData_df['GDPGrowth'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDPGrowth']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDPGrowth'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDPGrowth'])
+plt.show()
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['GDP'].describe())
+print('\n')
+print(worldData_df['GDP'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP'])
+plt.show()
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['FertilityRate'].describe())
+print('\n')
+print(worldData_df['GDP'][worldData_df['FertilityRate']=='World'])
+
+teamData_df['FertilityRate']
+
+plt.bar(x=teamData_df.index, height=teamData_df['FertilityRate'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['FertilityRate'])
+plt.show()
+
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['EmploymentServices'].describe())
+print('\n')
+print(worldData_df['EmploymentServices'][worldData_df['EmploymentServices']=='World'])
+
+teamData_df['EmploymentServices']
+
+plt.bar(x=teamData_df.index, height=teamData_df['EmploymentServices'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['EmploymentServices'])
+plt.show()
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['EmploymentIndustry'].describe())
+print('\n')
+print(worldData_df['EmploymentIndustry'][worldData_df['EmploymentIndustry']=='World'])
+
+teamData_df['EmploymentIndustry']
+
+plt.bar(x=teamData_df.index, height=teamData_df['EmploymentIndustry'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['EmploymentIndustry'])
+plt.show()
+
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
+#Describe + simple histogram and bar plot
+print(teamData_df['EmploymentAgriculture'].describe())
+print('\n')
+print(worldData_df['EmploymentAgriculture'][worldData_df['EmploymentAgriculture']=='World'])
+
+teamData_df['EmploymentAgriculture']
+
+plt.bar(x=teamData_df.index, height=teamData_df['EmploymentAgriculture'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['EmploymentAgriculture'])
+plt.show()
