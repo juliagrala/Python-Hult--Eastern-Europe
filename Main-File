@@ -1,1 +1,95 @@
+#import data from Excel
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
 
+file='WDIW Dataset.xlsx'
+
+worldData_df=pd.read_excel(file, index_col=0)
+
+#CountryCode             = 'CountryCode'
+CountryName             = 'CountryName'
+HultRegion              = 'Hult Region'
+CoolName                = 'Cool Name'
+ElectricityAccessTotal  = 'ElectricityAccessTotal'
+ElectricityRuralAccess  = 'ElectricityRuralAccess'
+ElectricityUrbanAccess  = 'ElectricityUrbanAccess'
+AdolescentFertility     = 'AdolescentFertility'
+AgeDependencyTotal      = 'AgeDependencyTotal'
+AgeDependencyOld        = 'AgeDependencyOld'
+AgeDependencyYoung      = 'AgeDependencyYoung'
+GDP_AgriForFish         = 'GDP_AgriForFish'
+ArmedForces             = 'ArmedForces'
+BirthRate               = 'BirthRate'
+BirthSkilledStaff       = 'BirthSkilledStaff'
+DeathRate               = 'DeathRate'
+EducationPHD            = 'EducationPHD'
+EducationBachelor       = 'EducationBachelor'
+EducationMaster         = 'EducationMaster'
+EducationLowerSecondary = 'EducationLowerSecondary'
+EducationPostSecondary  = 'EducationPostSecondary'
+EducationPrimary        = 'EducationPrimary'
+EducationTertiary       = 'EducationTertiary'
+EducationUpperSecondary = 'EducationUpperSecondary'
+EmploymentAgriculture   = 'EmploymentAgriculture'
+EmploymentIndustry      = 'EmploymentIndustry'
+EmploymentServices      = 'EmploymentServices'
+FertilityRate           = 'FertilityRate'
+GDP                     = 'GDP'
+GDPGrowth               = 'GDPGrowth'
+GINI                    = 'GINI'
+ExpendEducation         = 'ExpendEducation'
+IncomeFourth            = 'IncomeFourth'
+IncomeFifth             = 'IncomeFifth'
+IncomeFirst             = 'IncomeFirst'
+IncomeSecond            = 'IncomeSecond'
+IncomeThird             = 'IncomeThird'
+GDP_Industry            = 'GDP_Industry'
+LifeExpectancy          = 'LifeExpectancy'
+LiteracyAdult           = 'LiteracyAdult'
+LiteracyYouth           = 'LiteracyYouth'
+GDP_Merchandise         = 'GDP_Merchandise'
+ExpendMilitary          = 'ExpendMilitary'
+MobileSubs              = 'MobileSubs'
+PovertyByHealthcare     = 'PovertyByHealthcare'
+Population0_14          = 'Population0_14'
+Population15_64         = 'Population15_64'
+Population65            = 'Population65+'
+PopulationDensity       = 'PopulationDensity'
+PopulationGrowth        = 'PopulationGrowth'
+PopulationLargestCity   = 'PopulationLargestCity'
+PopulationSlums         = 'PopulationSlums'
+PopulationFemale        = 'PopulationFemale'
+PopulationMale          = 'PopulationMale'
+PopulationTotal         = 'PopulationTotal'
+Poverty_1               = 'Poverty_1.90'
+Poverty_3               = 'Poverty_3.20'
+Poverty_NationalLine    = 'Poverty_NationalLine'
+HIV                     = 'HIV'
+Undernourishment        = 'Undernourishment'
+Underweight             = 'Underweight'
+PopulationRural         = 'PopulationRural'
+GDP_Services            = 'GDP_Services'
+SurfaceArea             = 'SurfaceArea'
+TaxRevenue              = 'TaxRevenue'
+PopulationUrban         = 'PopulationUrban'
+PopulationUrbanGrowth   = 'PopulationUrbanGrowth'
+
+newColumns=[#CountryCode,
+            CountryName, HultRegion, CoolName, ElectricityAccessTotal, ElectricityRuralAccess,\
+            ElectricityUrbanAccess, AdolescentFertility, AgeDependencyTotal, AgeDependencyOld, AgeDependencyYoung, GDP_AgriForFish,\
+            ArmedForces, BirthRate, BirthSkilledStaff, DeathRate, EducationPHD, EducationBachelor, \
+            EducationMaster, EducationLowerSecondary, EducationPostSecondary, EducationPrimary, EducationTertiary, EducationUpperSecondary,\
+            EmploymentAgriculture, EmploymentIndustry, EmploymentServices, FertilityRate, GDP, GDPGrowth,\
+            GINI, ExpendEducation, IncomeFourth, IncomeFifth, IncomeFirst, IncomeSecond,\
+            IncomeThird, GDP_Industry, LifeExpectancy, LiteracyAdult, LiteracyYouth, GDP_Merchandise,\
+            ExpendMilitary, MobileSubs, PovertyByHealthcare, Population0_14, Population15_64, Population65,\
+            PopulationDensity, PopulationGrowth, PopulationLargestCity, PopulationSlums, PopulationFemale, PopulationMale,\
+            PopulationTotal, Poverty_1, Poverty_3, Poverty_NationalLine, HIV, Undernourishment,\
+            Underweight, PopulationRural, GDP_Services, SurfaceArea, TaxRevenue, PopulationUrban,\
+            PopulationUrbanGrowth]
+
+worldData_df.columns = newColumns
+
+teamData_df=worldData_df[worldData_df['Cool Name']=='Skids & Mudflap']
