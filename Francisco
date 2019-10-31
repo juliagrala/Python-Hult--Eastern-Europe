@@ -1,0 +1,168 @@
+#ElectricityAccessTotal
+print(teamData_df['ElectricityAccessTotal'].describe())
+
+worldData_df['ElectricityAccessTotal'][worldData_df['CountryName']=='World']
+
+#ElectricityRuralAccess
+print(teamData_df['ElectricityRuralAccess'].describe())
+
+worldData_df['ElectricityRuralAccess'][worldData_df['CountryName']=='World']
+
+#ElectricityUrbanAccess
+print(teamData_df['ElectricityUrbanAccess'].describe())
+
+worldData_df['ElectricityUrbanAccess'][worldData_df['CountryName']=='World']
+
+#Adolescent Fertility
+print(teamData_df['AdolescentFertility'].describe())
+print('\n')
+print(worldData_df['AdolescentFertility'][worldData_df['CountryName']=='World'])
+
+teamData_df.boxplot(column=['AdolescentFertility'], vert=False)
+plt.show()
+
+adolescentFertility_df=pd.DataFrame(teamData_df['AdolescentFertility'])
+
+adolescentFertility_df.loc[['AND','XKX','SMR'],'AdolescentFertility']=0
+
+adolescentFertility_df
+
+sns.distplot(adolescentFertility_df['AdolescentFertility'])
+plt.xlabel("AdolescentFertility")
+plt.show()
+
+plt.bar(x=teamData_df.index, height=teamData_df['AdolescentFertility'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Slovakia, Hungary and Albania are potential outliers
+#Andorra, Kosovo and San Marino do not report
+#According to wikipedia, there is little adolescent population, this could be the reason this metric is not reported
+#https://en.wikipedia.org/wiki/Demographics_of_Andorra
+
+
+#AgeDependencyTotal
+print(teamData_df['AgeDependencyTotal'].describe())
+print('\n')
+print(worldData_df['AgeDependencyTotal'][worldData_df['CountryName']=='World'])
+
+teamData_df['AgeDependencyTotal']
+
+teamData_df.hist(column=['AgeDependencyTotal'], bins='fd')
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+worldData_df['AgeDependencyTotal'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+worldData_df['AgeDependencyTotal'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+teamData_df.boxplot(column=['AgeDependencyTotal'])
+plt.show()
+
+#AgeDependencyOld
+print(teamData_df['AgeDependencyOld'].describe())
+print('\n')
+print(worldData_df['AgeDependencyOld'][worldData_df['CountryName']=='World'])
+
+teamData_df['AgeDependencyOld']
+
+teamData_df.hist(column=['AgeDependencyOld'])
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+worldData_df['AgeDependencyOld'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+worldData_df['AgeDependencyOld'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+teamData_df.boxplot(column=['AgeDependencyOld'])
+plt.show()
+
+#AgeDependencyYoung
+print(teamData_df['AgeDependencyYoung'].describe())
+print('\n')
+print(worldData_df['AgeDependencyYoung'][worldData_df['CountryName']=='World'])
+
+teamData_df['AgeDependencyYoung']
+
+teamData_df.hist(column=['AgeDependencyYoung'])
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Young')
+plt.show()
+
+worldData_df['AgeDependencyYoung'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Young')
+plt.show()
+
+worldData_df['AgeDependencyYoung'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Young')
+plt.show()
+
+teamData_df.boxplot(column=['AgeDependencyYoung'])
+plt.show()
+
+#GDP_AgriForFish
+print(teamData_df['GDP_AgriForFish'].describe())
+print('\n')
+print(worldData_df['GDP_AgriForFish'][worldData_df['CountryName']=='World'])
+
+teamData_df['GDP_AgriForFish']
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDP_AgriForFish'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['GDP_AgriForFish'])
+plt.show()
+
+#ArmedForces
+print(teamData_df['ArmedForces'].describe())
+print('\n')
+print(worldData_df['ArmedForces'][worldData_df['CountryName']=='World'])
+
+#teamData_df[['CountryName','ArmedForces']]
+
+plt.bar(x=teamData_df.index, height=teamData_df['ArmedForces'])
+plt.xticks(rotation=90)
+
+#Birth Rate
+print(teamData_df['BirthRate'].describe())
+print('\n')
+print(worldData_df['BirthRate'][worldData_df['CountryName']=='World'])
+
+#teamData_df[['CountryName','BirthRate']]
+
+plt.bar(x=teamData_df.index, height=teamData_df['BirthRate'])
+plt.xticks(rotation=90)
+plt.show()
+
+#DeathRate
+print(teamData_df['DeathRate'].describe())
+print('\n')
+print(worldData_df['DeathRate'][worldData_df['CountryName']=='World'])
+
+teamData_df['DeathRate']
+
+plt.bar(x=teamData_df.index, height=teamData_df['DeathRate'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamData_df.hist(column=['DeathRate'], bins='sturges')
+plt.show()
+plt.show()
+#Greece and Macedonia are outliers
