@@ -1,182 +1,242 @@
-#Describe + simple histogram and bar plot
-print(teamData_df['IncomeFourth'].describe())
+************************************Armed Forces****************************************
+
+#Describe + simple histogram and bar plot - Armed Forces
+print(teamData_df['ArmedForces'].describe())
 print('\n')
-print(worldData_df['IncomeFourth'][worldData_df['CountryName']=='World'])
+print(worldData_df['ArmedForces'][worldData_df['CountryName']=='World'])
 
-teamData_df['IncomeFourth']
+teamData_df['ArmedForces']
 
-plt.bar(x=teamData_df.index, height=teamData_df['IncomeFourth'])
-plt.xticks(rotation=90)
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['ArmedForces'].mean()
+teamDataCleaned_df['ArmedForces'] = teamDataCleaned_df['ArmedForces'].fillna(ArmedForces_mean)
+
+plt.title('Armed Forces - % of Total Labor force')
+plt.bar(x=teamData_df.index, height=teamData_df['ArmedForces'])
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['IncomeFourth'])
+#X-bar plot - Filled the gaps
+plt.title('Armed Forces - % of Total labor force')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['ArmedForces'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
-print(teamData_df['IncomeFifth'].describe())
-print('\n')
-print(worldData_df['IncomeFifth'][worldData_df['CountryName']=='World'])
-
-teamData_df['IncomeFifth']
-
-plt.bar(x=teamData_df.index, height=teamData_df['IncomeFifth'])
-plt.xticks(rotation=90)
+#Histogram Plot
+teamDataCleaned_df.hist(column=['ArmedForces'])
 plt.show()
 
-teamData_df.hist(column=['IncomeFifth'])
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['ArmedForces'])
+plt.title("Armed Forces - % of total labor force - Seaborn")
 plt.show()
 
-#Describe + simple histogram and bar plot
-print(teamData_df['IncomeFirst'].describe())
-print('\n')
-print(worldData_df['IncomeFirst'][worldData_df['CountryName']=='World'])
+************************************Armed Forces****************************************
 
-teamData_df['IncomeFirst']
+************************************GDP by Industry****************************************
 
-plt.bar(x=teamData_df.index, height=teamData_df['IncomeFirst'])
-plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['IncomeFirst'])
-plt.show()
-
-#Describe + simple histogram and bar plot
-print(teamData_df['IncomeSecond'].describe())
-print('\n')
-print(worldData_df['IncomeSecond'][worldData_df['CountryName']=='World'])
-
-teamData_df['IncomeSecond']
-
-plt.bar(x=teamData_df.index, height=teamData_df['IncomeSecond'])
-plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['IncomeSecond'])
-plt.show()
-
-
-#Describe + simple histogram and bar plot
-print(teamData_df['IncomeThird'].describe())
-print('\n')
-print(worldData_df['IncomeThird'][worldData_df['CountryName']=='World'])
-
-teamData_df['IncomeThird']
-
-plt.bar(x=teamData_df.index, height=teamData_df['IncomeThird'])
-plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['IncomeThird'])
-plt.show()
-
-#Describe + simple histogram and bar plot
+#Describe + simple histogram and bar plot - GDP by Industry
 print(teamData_df['GDP_Industry'].describe())
 print('\n')
 print(worldData_df['GDP_Industry'][worldData_df['CountryName']=='World'])
 
 teamData_df['GDP_Industry']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['GDP_Industry'].mean()
+teamDataCleaned_df['GDP_Industry'] = teamDataCleaned_df['GDP_Industry'].fillna(ArmedForces_mean)
+
+plt.title('Industry (% of GDP)')
 plt.bar(x=teamData_df.index, height=teamData_df['GDP_Industry'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['GDP_Industry'])
+#X-bar plot - Filled the gaps
+plt.title('Industry (% of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Industry'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
+#Histogram Plot
+teamDataCleaned_df.hist(column=['GDP_Industry'])
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['GDP_Industry'])
+plt.title("Industry (% of GDP) - Seaborn")
+plt.show()
+
+************************************GDP by Industry****************************************
+
+************************************Life Expectancy****************************************
+
+#Describe + simple histogram and bar plot - Life Expectancy
 print(teamData_df['LifeExpectancy'].describe())
 print('\n')
 print(worldData_df['LifeExpectancy'][worldData_df['CountryName']=='World'])
 
 teamData_df['LifeExpectancy']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['LifeExpectancy'].mean()
+teamDataCleaned_df['LifeExpectancy'] = teamDataCleaned_df['LifeExpectancy'].fillna(ArmedForces_mean)
+
+plt.title('Life Expectancy at Birth (in years)')
 plt.bar(x=teamData_df.index, height=teamData_df['LifeExpectancy'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['LifeExpectancy'])
+#X-bar plot - Filled the gaps
+plt.title('Life Expectancy at Birth (in years)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['LifeExpectancy'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
-print(teamData_df['LiteracyAdult'].describe())
-print('\n')
-print(worldData_df['LiteracyAdult'][worldData_df['CountryName']=='World'])
-
-teamData_df['LiteracyAdult']
-
-plt.bar(x=teamData_df.index, height=teamData_df['LiteracyAdult'])
-plt.xticks(rotation=90)
+#Histogram Plot
+teamDataCleaned_df.hist(column=['LifeExpectancy'])
 plt.show()
 
-teamData_df.hist(column=['LiteracyAdult'])
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['LifeExpectancy'])
+plt.title("Life Expectancy at Birth (in years) - Seaborn")
 plt.show()
 
-#Describe + simple histogram and bar plot
-print(teamData_df['LiteracyYouth'].describe())
-print('\n')
-print(worldData_df['LiteracyYouth'][worldData_df['CountryName']=='World'])
+************************************Life Expectancy****************************************
 
-teamData_df['LiteracyYouth']
+************************************GDP by Merchandise****************************************
 
-plt.bar(x=teamData_df.index, height=teamData_df['LiteracyYouth'])
-plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['LiteracyYouth'])
-plt.show()
-
-#Describe + simple histogram and bar plot
+#Describe + simple histogram and bar plot - GDP by Merchandise
 print(teamData_df['GDP_Merchandise'].describe())
 print('\n')
 print(worldData_df['GDP_Merchandise'][worldData_df['CountryName']=='World'])
 
 teamData_df['GDP_Merchandise']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['GDP_Merchandise'].mean()
+teamDataCleaned_df['GDP_Merchandise'] = teamDataCleaned_df['GDP_Merchandise'].fillna(ArmedForces_mean)
+
+plt.title('Merchandise Trade (% of GDP)')
 plt.bar(x=teamData_df.index, height=teamData_df['GDP_Merchandise'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['GDP_Merchandise'])
+#X-bar plot - Filled the gaps
+plt.title('Merchandise Trade (% of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Merchandise'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
+#Histogram Plot
+teamDataCleaned_df.hist(column=['GDP_Merchandise'])
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['GDP_Merchandise'])
+plt.title("Merchandise Trade (% of GDP) - Seaborn")
+plt.show()
+
+************************************GDP by Merchandise****************************************
+
+************************************Expend by Military****************************************
+
+#Describe + simple histogram and bar plot - Expend by Military
 print(teamData_df['ExpendMilitary'].describe())
 print('\n')
 print(worldData_df['ExpendMilitary'][worldData_df['CountryName']=='World'])
 
 teamData_df['ExpendMilitary']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['ExpendMilitary'].mean()
+teamDataCleaned_df['ExpendMilitary'] = teamDataCleaned_df['ExpendMilitary'].fillna(ArmedForces_mean)
+
+plt.title('Military Expenditure( % of GDP)')
 plt.bar(x=teamData_df.index, height=teamData_df['ExpendMilitary'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['ExpendMilitary'])
+#X-bar plot - Filled the gaps
+plt.title('Military Expenditure( % of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['ExpendMilitary'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
+#Histogram Plot
+teamDataCleaned_df.hist(column=['ExpendMilitary'])
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['ExpendMilitary'])
+plt.title("Military Expenditure( % of GDP) - Seaborn")
+plt.show()
+
+************************************Expend by Military****************************************
+
+************************************Mobile Subscribers****************************************
+
+#Describe + simple histogram and bar plot - Mobile Subscribers
 print(teamData_df['MobileSubs'].describe())
 print('\n')
 print(worldData_df['MobileSubs'][worldData_df['CountryName']=='World'])
 
 teamData_df['MobileSubs']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['MobileSubs'].mean()
+teamDataCleaned_df['MobileSubs'] = teamDataCleaned_df['MobileSubs'].fillna(ArmedForces_mean)
+
+plt.title('Mobile Subcribers (per 100 people)')
 plt.bar(x=teamData_df.index, height=teamData_df['MobileSubs'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['MobileSubs'])
+#X-bar plot - Filled the gaps
+plt.title('Mobile Subcribers (per 100 people)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['MobileSubs'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
 plt.show()
 
-#Describe + simple histogram and bar plot
+#Histogram Plot
+teamDataCleaned_df.hist(column=['MobileSubs'])
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['MobileSubs'])
+plt.title("Mobile Subcribers (per 100 people) - Seaborn")
+plt.show()
+
+************************************Mobile Subscribers****************************************
+
+************************************Poverty By Healthcare****************************************
+
+#Describe + simple histogram and bar plot - Poverty By Healthcare
 print(teamData_df['PovertyByHealthcare'].describe())
 print('\n')
 print(worldData_df['PovertyByHealthcare'][worldData_df['CountryName']=='World'])
 
 teamData_df['PovertyByHealthcare']
 
+teamDataCleaned_df=teamData_df.copy()
+ArmedForces_mean = teamDataCleaned_df['PovertyByHealthcare'].mean()
+teamDataCleaned_df['PovertyByHealthcare'] = teamDataCleaned_df['PovertyByHealthcare'].fillna(ArmedForces_mean)
+
+plt.title('Below Poverty Line < $3.10')
 plt.bar(x=teamData_df.index, height=teamData_df['PovertyByHealthcare'])
-plt.xticks(rotation=90)
+plt.xticks(ticks=teamData_df.index, labels=teamData_df['CountryName'],rotation=90)
 plt.show()
 
-teamData_df.hist(column=['PovertyByHealthcare'])
+#X-bar plot - Filled the gaps
+plt.title('Below Poverty Line < $3.10')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PovertyByHealthcare'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+teamDataCleaned_df.hist(column=['PovertyByHealthcare'])
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['PovertyByHealthcare'])
+plt.title("Below Poverty Line < $3.10 - Seaborn")
 plt.show()
