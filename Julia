@@ -1,122 +1,126 @@
+######DATA EXPLORATION
 
-#Describe + simple histogram and bar plot
-print(teamData_df['HIV'].describe())
+#HIV
+print(teamDataCleaned_df['HIV'].describe())
 print('\n')
 print(worldData_df['HIV'][worldData_df['CountryName']=='World'])
 
-teamData_df['HIV']
+teamDataCleaned_df['HIV']
 
-plt.bar(x=teamData_df.index, height=teamData_df['HIV'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['HIV'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['HIV'])
+teamDataCleaned_df.hist(column=['HIV'])
 plt.show()
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['Undernourishment'].describe())
+# UNDERNOURSHMENT
+print(teamDataCleaned_df['Undernourishment'].describe())
 print('\n')
 print(worldData_df['Undernourishment'][worldData_df['CountryName']=='World'])
 
-teamData_df['Undernourishment']
+teamDataCleaned_df['Undernourishment']
 
-plt.bar(x=teamData_df.index, height=teamData_df['Undernourishment'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['Undernourishment'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['Undernourishment'])
+teamDataCleaned_df.hist(column=['Undernourishment'])
 plt.show()
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['PopulationRural'].describe())
+#POPULATION RURAL
+print(teamDataCleaned_df['PopulationRural'].describe())
 print('\n')
 print(worldData_df['PopulationRural'][worldData_df['CountryName']=='World'])
 
-teamData_df['PopulationRural']
+teamDataCleaned_df['PopulationRural']
 
-plt.bar(x=teamData_df.index, height=teamData_df['PopulationRural'])
+#MEDIAN 
+kosovo_median_PopulationRural= teamDataCleaned_df['PopulationRural'].median()
+teamDataCleaned_df.loc['XKX','PopulationRural']=kosovo_median_PopulationRural
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationRural'])
 plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['PopulationRural'])
-plt.show()
-
-
-#Describe + simple histogram and bar plot
-print(teamData_df['GDP_Services'].describe())
-print('\n')
-print(worldData_df['GDP_Services'][worldData_df['CountryName']=='World'])
-
-teamData_df['GDP_Services']
-
-plt.bar(x=teamData_df.index, height=teamData_df['GDP_Services'])
-plt.xticks(rotation=90)
-plt.show()
-
-teamData_df.hist(column=['GDP_Services'])
+teamDataCleaned_df.hist(column=['PopulationRural'])
 plt.show()
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['SurfaceArea'].describe())
+
+# SURFACE AREA
+print(teamDataCleaned_df['SurfaceArea'].describe())
 print('\n')
 print(worldData_df['SurfaceArea'][worldData_df['CountryName']=='World'])
 
-teamData_df['SurfaceArea']
+teamDataCleaned_df['SurfaceArea']
 
-plt.bar(x=teamData_df.index, height=teamData_df['SurfaceArea'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['SurfaceArea'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['SurfaceArea'])
+teamDataCleaned_df.hist(column=['SurfaceArea'])
 plt.show()
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['TaxRevenue'].describe())
+# TAX REVENUE GDP 
+print(teamDataCleaned_df['TaxRevenue'].describe())
 print('\n')
 print(worldData_df['TaxRevenue'][worldData_df['CountryName']=='World'])
 
-teamData_df['TaxRevenue']
+teamDataCleaned_df['TaxRevenue']
 
-plt.bar(x=teamData_df.index, height=teamData_df['TaxRevenue'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['TaxRevenue'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['TaxRevenue'])
+teamDataCleaned_df.hist(column=['TaxRevenue'])
+plt.show()
+
+
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['TaxRevenue'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('% Tax Revenue from GDP')
+plt.show()
+
+worldData_df['TaxRevenue'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('% Tax Revenue from GDP')
 plt.show()
 
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['PopulationUrban'].describe())
+# POPULATION URBAN
+print(teamDataCleaned_df['PopulationUrban'].describe())
 print('\n')
 print(worldData_df['PopulationUrban'][worldData_df['CountryName']=='World'])
 
-teamData_df['PopulationUrban']
+teamDataCleaned_df['PopulationUrban']
 
-plt.bar(x=teamData_df.index, height=teamData_df['PopulationUrban'])
+kosovo_median_PopulationUrban= teamDataCleaned_df['PopulationUrban'].median()
+teamDataCleaned_df.loc['XKX','PopulationUrban']=kosovo_median_PopulationUrban
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationUrban'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['PopulationUrban'])
+teamDataCleaned_df.hist(column=['PopulationUrban'])
 plt.show()
 
 
 
-#Describe + simple histogram and bar plot
-print(teamData_df['PopulationUrbanGrowth'].describe())
+# POPULATION URBAN GROWTH 
+print(teamDataCleaned_df['PopulationUrbanGrowth'].describe())
 print('\n')
 print(worldData_df['PopulationUrbanGrowth'][worldData_df['CountryName']=='World'])
 
-teamData_df['PopulationUrbanGrowth']
+teamDataCleaned_df['PopulationUrbanGrowth']
 
-plt.bar(x=teamData_df.index, height=teamData_df['PopulationUrbanGrowth'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationUrbanGrowth'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['PopulationUrbanGrowth'])
+teamDataCleaned_df.hist(column=['PopulationUrbanGrowth'])
 plt.show()
 
