@@ -46,15 +46,21 @@ teamData_df.hist(column=['PopulationSlums'])
 plt.show()
 
 #Describe + simple histogram and bar plot / PopulationLargestCity
-print(teamData_df['PopulationLargestCity'].describe())
+teamDataCleaned_df.loc['MLT','PopulationLargestCity']= 5
+teamDataCleaned_df.loc['MNE','PopulationLargestCity']= 42.8
+teamDataCleaned_df.loc['SVN','PopulationLargestCity']= 25.7
+Kosovomedcity = teamDataCleaned_df['PopulationLargestCity'].median()
+teamDataCleaned_df[['PopulationLargestCity']] = teamDataCleaned_df[['PopulationLargestCity']].fillna(Kosovomedcity)
+
+print(teamDataCleaned_df['PopulationLargestCity'].describe())
 print('\n')
 print(worldData_df['PopulationLargestCity'][worldData_df['CountryName']=='World'])
 
-teamData_df['PopulationLargestCity']
+teamDataCleaned_df['PopulationLargestCity']
 
-plt.bar(x=teamData_df.index, height=teamData_df['PopulationLargestCity'])
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationLargestCity'])
 plt.xticks(rotation=90)
 plt.show()
 
-teamData_df.hist(column=['PopulationLargestCity'])
+teamDataCleaned_df.hist(column=['PopulationLargestCity'])
 plt.show()
