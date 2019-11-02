@@ -339,93 +339,248 @@ plt.show()
 
 ######################## MONIKA
 #############################################################################
+########################################################################################################################################
+                                                            #Data Exploration
+########################################################################################################################################
+
+
 #Describe + simple histogram and bar plot
-print(teamData_df['EmploymentAgriculture'].describe())
+print(teamDataCleaned_df['EmploymentAgriculture'].describe())
 print('\n')
 print(worldData_df['EmploymentAgriculture'][worldData_df['EmploymentAgriculture']=='World'])
-teamData_df['EmploymentAgriculture']
-plt.bar(x=teamData_df.index, height=teamData_df['EmploymentAgriculture'])
+
+EmploymentAgriculture_median = teamDataCleaned_df['EmploymentAgriculture'].median()
+teamDataCleaned_df[['EmploymentAgriculture']] = teamDataCleaned_df[['EmploymentAgriculture']].fillna(EmploymentAgriculture_median)
+
+teamDataCleaned_df['EmploymentAgriculture']
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentAgriculture'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['EmploymentAgriculture'])
+
+teamDataCleaned_df.hist(column=['EmploymentAgriculture'])
 plt.show()
 
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['EmploymentAgriculture'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('EmploymentAgriculture')
+plt.show()
+
+worldData_df['EmploymentAgriculture'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('EmploymentAgriculture')
+plt.show()
+
+########################################################################################################################################
+                                                            #EmploymnetIndustry
+########################################################################################################################################
+
+
 #Describe + simple histogram and bar plot
-print(teamData_df['EmploymentIndustry'].describe())
+print(teamDataCleaned_df['EmploymentIndustry'].describe())
 print('\n')
 print(worldData_df['EmploymentIndustry'][worldData_df['EmploymentIndustry']=='World'])
-teamData_df['EmploymentIndustry']
-plt.bar(x=teamData_df.index, height=teamData_df['EmploymentIndustry'])
+
+teamDataCleaned_df['EmploymentIndustry']
+
+EmploymentIndustry_median = teamDataCleaned_df['EmploymentIndustry'].median()
+teamDataCleaned_df[['EmploymentIndustry']] = teamDataCleaned_df[['EmploymentIndustry']].fillna(EmploymentIndustry_median)
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentIndustry'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['EmploymentIndustry'])
+
+teamDataCleaned_df.hist(column=['EmploymentIndustry'])
 plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['EmploymentIndustry'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('EmploymentIndustry')
+plt.show()
+
+worldData_df['EmploymentIndustry'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('EmploymentIndustry')
+plt.show()
+
+########################################################################################################################################
+                                                            #EmploymentServices
+########################################################################################################################################
 
 
 #Describe + simple histogram and bar plot
-print(teamData_df['EmploymentServices'].describe())
+print(teamDataCleaned_df['EmploymentServices'].describe())
 print('\n')
 print(worldData_df['EmploymentServices'][worldData_df['EmploymentServices']=='World'])
-teamData_df['EmploymentServices']
-plt.bar(x=teamData_df.index, height=teamData_df['EmploymentServices'])
+
+EmploymentServices_median = teamDataCleaned_df['EmploymentServices'].median()
+teamDataCleaned_df[['EmploymentServices']] = teamDataCleaned_df[['EmploymentServices']].fillna(EmploymentServices_median)
+
+teamDataCleaned_df['EmploymentServices']
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentServices'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['EmploymentServices'])
+
+teamDataCleaned_df.hist(column=['EmploymentServices'])
 plt.show()
 
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['EmploymentServices'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('EmploymentServices')
+plt.show()
+
+worldData_df['EmploymentServices'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('EmploymentServices')
+plt.show()
+
+########################################################################################################################################
+                                                            #FertilityRate 
+########################################################################################################################################
+
+
 #Describe + simple histogram and bar plot
-print(teamData_df['FertilityRate'].describe())
+print(teamDataCleaned_df['FertilityRate'].describe())
 print('\n')
-print(worldData_df['GDP'][worldData_df['FertilityRate']=='World'])
-teamData_df['FertilityRate']
-plt.bar(x=teamData_df.index, height=teamData_df['FertilityRate'])
+print(worldData_df['FertilityRate'][worldData_df['FertilityRate']=='World'])
+
+teamDataCleaned_df['FertilityRate']
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['FertilityRate'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['FertilityRate'])
+
+teamDataCleaned_df.hist(column=['FertilityRate'])
 plt.show()
 
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['FertilityRate'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('FertilityRate')
+plt.show()
+
+worldData_df['FertilityRate'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('FertilityRate')
+plt.show()
+
+########################################################################################################################################
+                                                            #GDP
+########################################################################################################################################
+
+
 #Describe + simple histogram and bar plot
-print(teamData_df['GDP'].describe())
+print(teamDataCleaned_df['GDP'].describe())
 print('\n')
 print(worldData_df['GDP'][worldData_df['CountryName']=='World'])
+
 teamData_df['GDP']
-plt.bar(x=teamData_df.index, height=teamData_df['GDP'])
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['GDP'])
+
+teamDataCleaned_df.hist(column=['GDP'])
 plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['GDP'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('GDP')
+plt.show()
+
+worldData_df['GDP'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('GDP')
+plt.show()
+
+########################################################################################################################################
+                                                            #GDPGrowth
+########################################################################################################################################
+
 
 #Describe + simple histogram and bar plot
 print(teamData_df['GDPGrowth'].describe())
 print('\n')
 print(worldData_df['GDPGrowth'][worldData_df['CountryName']=='World'])
+
 teamData_df['GDPGrowth']
+
 plt.bar(x=teamData_df.index, height=teamData_df['GDPGrowth'])
 plt.xticks(rotation=90)
 plt.show()
+
 teamData_df.hist(column=['GDPGrowth'])
 plt.show()
 
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['GDPGrowth'][worldData_df['Cool Name']=='Jetfire'].hist()
+plt.title('Western Europe')
+plt.xlabel('GDPGrowth')
+plt.show()
+
+worldData_df['GDPGrowth'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
+plt.title('Rest of the World')
+plt.xlabel('GDPGrowth')
+plt.show()
+
+
+########################################################################################################################################
+                                                            #GINI
+########################################################################################################################################
+
+
 #Describe + simple histogram and bar plot
-print(teamData_df['GINI'].describe())
+print(teamDataCleaned_df['GINI'].describe())
 print('\n')
 print(worldData_df['GINI'][worldData_df['GINI']=='World'])
-teamData_df['GINI']
-plt.bar(x=teamData_df.index, height=teamData_df['GINI'])
+
+teamDataCleaned_df['GINI']
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GINI'])
 plt.xticks(rotation=90)
 plt.show()
-teamData_df.hist(column=['GINI'])
+
+teamDataCleaned_df.hist(column=['GINI'])
 plt.show()
+
 
 #Adding histograms for Western Europe and the Rest of the World
 worldData_df['GINI'][worldData_df['Cool Name']=='Jetfire'].hist()
 plt.title('Western Europe')
 plt.xlabel('GINI')
 plt.show()
+
 worldData_df['GINI'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist()
 plt.title('Rest of the World')
 plt.xlabel('GINI')
 plt.show()
+
+########################################################################################################################################
+                                                            #GDP_Services
+########################################################################################################################################
+
+#Describe + simple histogram and bar plot
+print(teamDataCleaned_df['GDP_Services'].describe())
+print('\n')
+print(worldData_df['GDP_Services'][worldData_df['GDP_Services']=='World'])
+
+teamDataCleaned_df['GDP_Services']
+
+teamDataCleaned_df.loc['POL','GDP_Services']= 58.302
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Services'])
+plt.xticks(rotation=90)
+plt.show()
+
+teamDataCleaned_df.hist(column=['GDP_Services'])
+plt.show()
+
+
 
 
 ######################## ARJUN
