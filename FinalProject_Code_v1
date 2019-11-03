@@ -1,0 +1,1212 @@
+######################################################################################################################
+                                                #Import packages
+######################################################################################################################
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+######################################################################################################################
+                                                #Import Data from Excel
+######################################################################################################################
+
+#1. Import data
+
+file='WDIW Dataset.xlsx'
+
+worldData_df=pd.read_excel(file, index_col=0)
+
+#CountryCode             = 'CountryCode'
+CountryName             = 'CountryName'
+HultRegion              = 'Hult Region'
+CoolName                = 'Cool Name'
+ElectricityAccessTotal  = 'ElectricityAccessTotal'
+ElectricityRuralAccess  = 'ElectricityRuralAccess'
+ElectricityUrbanAccess  = 'ElectricityUrbanAccess'
+AdolescentFertility     = 'AdolescentFertility'
+AgeDependencyTotal      = 'AgeDependencyTotal'
+AgeDependencyOld        = 'AgeDependencyOld'
+AgeDependencyYoung      = 'AgeDependencyYoung'
+GDP_AgriForFish         = 'GDP_PrimaryActivities'
+ArmedForces             = 'ArmedForces'
+BirthRate               = 'BirthRate'
+BirthSkilledStaff       = 'BirthSkilledStaff'
+DeathRate               = 'DeathRate'
+EducationPHD            = 'EducationPHD'
+EducationBachelor       = 'EducationBachelor'
+EducationMaster         = 'EducationMaster'
+EducationLowerSecondary = 'EducationLowerSecondary'
+EducationPostSecondary  = 'EducationPostSecondary'
+EducationPrimary        = 'EducationPrimary'
+EducationTertiary       = 'EducationTertiary'
+EducationUpperSecondary = 'EducationUpperSecondary'
+EmploymentAgriculture   = 'EmploymentAgriculture'
+EmploymentIndustry      = 'EmploymentIndustry'
+EmploymentServices      = 'EmploymentServices'
+FertilityRate           = 'FertilityRate'
+GDP                     = 'GDP'
+GDPGrowth               = 'GDPGrowth'
+GINI                    = 'GINI'
+ExpendEducation         = 'ExpendEducation'
+IncomeFourth            = 'IncomeFourth'
+IncomeFifth             = 'IncomeFifth'
+IncomeFirst             = 'IncomeFirst'
+IncomeSecond            = 'IncomeSecond'
+IncomeThird             = 'IncomeThird'
+GDP_Industry            = 'GDP_Industry'
+LifeExpectancy          = 'LifeExpectancy'
+LiteracyAdult           = 'LiteracyAdult'
+LiteracyYouth           = 'LiteracyYouth'
+GDP_Merchandise         = 'GDP_Merchandise'
+ExpendMilitary          = 'ExpendMilitary'
+MobileSubs              = 'MobileSubs'
+PovertyByHealthcare     = 'PovertyByHealthcare'
+Population0_14          = 'Population0_14'
+Population15_64         = 'Population15_64'
+Population65            = 'Population65+'
+PopulationDensity       = 'PopulationDensity'
+PopulationGrowth        = 'PopulationGrowth'
+PopulationLargestCity   = 'PopulationLargestCity'
+PopulationSlums         = 'PopulationSlums'
+PopulationFemale        = 'PopulationFemale'
+PopulationMale          = 'PopulationMale'
+PopulationTotal         = 'PopulationTotal'
+Poverty_1               = 'Poverty_1.90'
+Poverty_3               = 'Poverty_3.20'
+Poverty_NationalLine    = 'Poverty_NationalLine'
+HIV                     = 'HIV'
+Undernourishment        = 'Undernourishment'
+Underweight             = 'Underweight'
+PopulationRural         = 'PopulationRural'
+GDP_Services            = 'GDP_Services'
+SurfaceArea             = 'SurfaceArea'
+TaxRevenue              = 'TaxRevenue'
+PopulationUrban         = 'PopulationUrban'
+PopulationUrbanGrowth   = 'PopulationUrbanGrowth'
+
+newColumns=[#CountryCode,
+            CountryName, HultRegion, CoolName, ElectricityAccessTotal, ElectricityRuralAccess,\
+            ElectricityUrbanAccess, AdolescentFertility, AgeDependencyTotal, AgeDependencyOld, AgeDependencyYoung, GDP_AgriForFish,\
+            ArmedForces, BirthRate, BirthSkilledStaff, DeathRate, EducationPHD, EducationBachelor, \
+            EducationMaster, EducationLowerSecondary, EducationPostSecondary, EducationPrimary, EducationTertiary, EducationUpperSecondary,\
+            EmploymentAgriculture, EmploymentIndustry, EmploymentServices, FertilityRate, GDP, GDPGrowth,\
+            GINI, ExpendEducation, IncomeFourth, IncomeFifth, IncomeFirst, IncomeSecond,\
+            IncomeThird, GDP_Industry, LifeExpectancy, LiteracyAdult, LiteracyYouth, GDP_Merchandise,\
+            ExpendMilitary, MobileSubs, PovertyByHealthcare, Population0_14, Population15_64, Population65,\
+            PopulationDensity, PopulationGrowth, PopulationLargestCity, PopulationSlums, PopulationFemale, PopulationMale,\
+            PopulationTotal, Poverty_1, Poverty_3, Poverty_NationalLine, HIV, Undernourishment,\
+            Underweight, PopulationRural, GDP_Services, SurfaceArea, TaxRevenue, PopulationUrban,\
+            PopulationUrbanGrowth]
+
+worldData_df.columns = newColumns
+
+#2. Creation of the subset for Eastern Europe
+
+teamData_df=worldData_df[worldData_df['Cool Name']=='Skids & Mudflap']
+
+#3. Eliminating Andorra and San Marino
+
+teamDataCleaned_df=teamData_df.copy()
+
+teamDataCleaned_df=teamDataCleaned_df.drop(labels=['AND','SMR'])
+
+######################################################################################################################
+                                                #Data Analysis
+######################################################################################################################
+
+#1. Adolescent Fertility
+
+print(teamData_df['AdolescentFertility'].describe())
+print('\n')
+print(worldData_df['AdolescentFertility'][worldData_df['CountryName']=='World'])
+
+#Histogram with missing values
+teamData_df.hist(column=['AdolescentFertility'], bins='sturges')
+plt.title('Eastern Europe')
+plt.xlabel('Adolescent Fertility')
+plt.show()
+
+#The distribution is somewhat normal so we will use the mean for completing Kosovo
+
+adolescentFertility_mean = teamDataCleaned_df['AdolescentFertility'].mean()
+teamDataCleaned_df[['AdolescentFertility']] = teamDataCleaned_df[['AdolescentFertility']].fillna(adolescentFertility_mean)
+
+print(teamDataCleaned_df['AdolescentFertility'].describe())
+
+print(worldData_df['AdolescentFertility'][worldData_df['CountryName']=='World'])
+
+sns.distplot(teamDataCleaned_df['AdolescentFertility'], bins='sturges')
+plt.title('Eastern Europe')
+plt.xlabel("AdolescentFertility")
+plt.show()
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['AdolescentFertility'])
+plt.title('AdolescentFertility')
+plt.xticks(rotation=90)
+plt.show()
+
+#2. Age Dependecy Total
+
+#We use the median of balcanic countries to fill Kosovo
+
+ageDependency_median=teamDataCleaned_df.loc[['BIH','HRV','SVN','ALB','SRB','MKD','MNE'],['AgeDependencyTotal']].median()
+
+teamDataCleaned_df[['AgeDependencyTotal']] = teamDataCleaned_df[['AgeDependencyTotal']].fillna(ageDependency_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['AgeDependencyTotal'].describe())
+print('\n')
+print(worldData_df['AgeDependencyTotal'][worldData_df['CountryName']=='World'])
+
+#Bar chat
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['AgeDependencyTotal'])
+plt.title('Age Dependency Total')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for Eastern Europe
+
+teamDataCleaned_df.hist(column=['AgeDependencyTotal'], bins='sturges')
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+#Histogram for Western Europe
+
+worldData_df['AgeDependencyTotal'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+#Histogram for the Rest of the World (Complement for Eastern Europe only)
+
+worldData_df['AgeDependencyTotal'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Total')
+plt.show()
+
+#3. Age Dependency Old
+
+#We use the median of balcanic countries to fill Kosovo
+
+ageDependencyOld_median=teamDataCleaned_df.loc[['BIH','HRV','SVN','ALB','SRB','MKD','MNE'],['AgeDependencyOld']].median()
+
+teamDataCleaned_df[['AgeDependencyOld']] = teamDataCleaned_df[['AgeDependencyOld']].fillna(ageDependencyOld_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['AgeDependencyOld'].describe())
+print('\n')
+print(worldData_df['AgeDependencyOld'][worldData_df['CountryName']=='World'])
+
+#Bar chat
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['AgeDependencyOld'])
+plt.title('Age Dependency Old')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for Eastern Europe
+
+teamData_df.hist(column=['AgeDependencyOld'], bins='sturges')
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+#Histogram for Western Europe
+
+worldData_df['AgeDependencyOld'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+#Histogram for the Rest of the World (Complement for Eastern Europe only)
+
+worldData_df['AgeDependencyOld'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+#4. Age Dependency Young
+
+#We use the median of balcanic countries to fill Kosovo
+
+ageDependencyOld_median=teamDataCleaned_df.loc[['BIH','HRV','SVN','ALB','SRB','MKD','MNE'],['AgeDependencyYoung']].median()
+
+teamDataCleaned_df[['AgeDependencyYoung']] = teamDataCleaned_df[['AgeDependencyYoung']].fillna(ageDependencyOld_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['AgeDependencyYoung'].describe())
+print('\n')
+print(worldData_df['AgeDependencyYoung'][worldData_df['CountryName']=='World'])
+
+#Bar chat
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['AgeDependencyYoung'])
+plt.title('Age Dependency Young')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for Eastern Europe
+
+teamData_df.hist(column=['AgeDependencyYoung'], bins='sturges')
+plt.title('Eastern Europe')
+plt.xlabel('Age Dependency Young')
+plt.show()
+
+#Histogram for Western Europe
+
+worldData_df['AgeDependencyYoung'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('Age Dependency Young')
+plt.show()
+
+#Histogram for the Rest of the World (Complement for Eastern Europe only)
+
+worldData_df['AgeDependencyOld'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('Age Dependency Old')
+plt.show()
+
+#5. GDP Primary Activities
+
+#We fill the missing value of Poland with data from CIA
+
+teamDataCleaned_df.loc['POL','GDP_PrimaryActivities']=2.7
+
+#Description of the variable and World average
+print(teamDataCleaned_df['GDP_PrimaryActivities'].describe())
+print('\n')
+print(worldData_df['GDP_PrimaryActivities'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_PrimaryActivities'])
+plt.title('GDP_PrimaryActivities')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+teamDataCleaned_df.hist(column=['GDP_PrimaryActivities'])
+plt.show()
+
+#Clear outlier: Albania
+
+#6. Birth Rate
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['BirthRate'].describe())
+print('\n')
+print(worldData_df['BirthRate'][worldData_df['CountryName']=='World'])
+
+#Bar Chart with raw values
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['BirthRate'])
+plt.title('BirthRate')
+plt.xticks(rotation=90)
+plt.show()
+
+#We create a new variable that converts the birth rate to proportion of the population
+
+teamDataCleaned_df['BirthRateProportion']=teamDataCleaned_df['BirthRate']*1000*100/teamDataCleaned_df['PopulationTotal']
+
+#Bar chart with the new variable
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['BirthRateProportion'])
+plt.xticks(rotation=90)
+plt.title('BirthRateProportion')
+plt.show()
+
+#7. Death Rate
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['DeathRate'].describe())
+print('\n')
+print(worldData_df['DeathRate'][worldData_df['CountryName']=='World'])
+
+#We create a new variable that converts the death rate to proportion of the population
+
+teamDataCleaned_df['DeathRateProportion']=teamDataCleaned_df['DeathRate']*1000*100/teamDataCleaned_df['PopulationTotal']
+
+#Bar Chart with raw values
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['DeathRate'])
+plt.title('DeathRate')
+plt.xticks(rotation=90)
+plt.show()
+
+#Bar chart with the new variable
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['DeathRateProportion'])
+plt.title('DeathRateProportion')
+plt.xticks(rotation=90)
+plt.show()
+
+#8. Population Total
+
+#Description of the variable and World average
+
+print(teamData_df['PopulationTotal'].describe())
+print('\n')
+print(worldData_df['PopulationTotal'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamData_df.index, height=teamData_df['PopulationTotal'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+teamData_df.hist(column=['PopulationTotal'], bins='sturges')
+plt.show()
+
+#9. Male Proportion
+
+#We convert male population in another variable called Male Proportion
+
+teamDataCleaned_df['MaleProportion']=pd.DataFrame(teamData_df['PopulationMale']/teamData_df['PopulationTotal'])
+
+#We complete the missing value for Kosovo with the median
+
+maleProportion_median = teamDataCleaned_df['MaleProportion'].median()
+teamDataCleaned_df[['MaleProportion']] = teamDataCleaned_df[['MaleProportion']].fillna(maleProportion_median)
+
+#We complete Male Population for Kosovo
+
+teamDataCleaned_df.loc['XKX','PopulationMale']=round(teamDataCleaned_df.loc['XKX','PopulationTotal']*teamDataCleaned_df.loc['XKX','MaleProportion'])
+      
+#Bar chart for Male Proportion
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['MaleProportion'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for Male Proportion
+teamDataCleaned_df.hist(column=['MaleProportion'], bins='sturges')
+plt.show()
+
+#10. Female Proportion
+
+#We convert female population in another variable called Female Proportion
+
+teamDataCleaned_df['FemaleProportion']=pd.DataFrame(teamData_df['PopulationFemale']/teamData_df['PopulationTotal'])
+
+#We complete the missing value for Kosovo with the median
+
+femaleProportion_median = teamDataCleaned_df['FemaleProportion'].median()
+teamDataCleaned_df[['FemaleProportion']] = teamDataCleaned_df[['FemaleProportion']].fillna(femaleProportion_median)
+
+#We complete Female Population for Kosovo
+
+teamDataCleaned_df.loc['XKX','PopulationFemale']=round(teamDataCleaned_df.loc['XKX','PopulationTotal']*teamDataCleaned_df.loc['XKX','FemaleProportion'])
+
+#Bar chart for Female Proportion
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['FemaleProportion'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for Female Proportion
+teamDataCleaned_df.hist(column=['FemaleProportion'], bins='sturges')
+plt.show()
+
+#11. Population Slums
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationSlums'].describe())
+print('\n')
+print(worldData_df['PopulationSlums'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationSlums'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['PopulationSlums'], bins='sturges')
+plt.show()
+
+#12. Population Largest City
+
+#We fill the missing values with data found on research and the median for Kosovo
+
+teamDataCleaned_df.loc['MLT','PopulationLargestCity']= 5
+teamDataCleaned_df.loc['MNE','PopulationLargestCity']= 42.8
+teamDataCleaned_df.loc['SVN','PopulationLargestCity']= 25.7
+
+Kosovomedcity = teamDataCleaned_df['PopulationLargestCity'].median()
+teamDataCleaned_df[['PopulationLargestCity']] = teamDataCleaned_df[['PopulationLargestCity']].fillna(Kosovomedcity)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationLargestCity'].describe())
+print('\n')
+print(worldData_df['PopulationLargestCity'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationLargestCity'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+teamDataCleaned_df.hist(column=['PopulationLargestCity'], bins='sturges')
+plt.show()
+
+#13. Employment Agriculture
+
+#We fill the missing value with the median
+
+EmploymentAgriculture_median = teamDataCleaned_df['EmploymentAgriculture'].median()
+teamDataCleaned_df[['EmploymentAgriculture']] = teamDataCleaned_df[['EmploymentAgriculture']].fillna(EmploymentAgriculture_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['EmploymentAgriculture'].describe())
+print('\n')
+print(worldData_df['EmploymentAgriculture'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentAgriculture'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['EmploymentAgriculture'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+
+worldData_df['EmploymentAgriculture'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('EmploymentAgriculture')
+plt.show()
+
+worldData_df['EmploymentAgriculture'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('EmploymentAgriculture')
+plt.show()
+
+#14. Employment Industry
+
+#We fill the missing value with the median
+
+EmploymentIndustry_median = teamDataCleaned_df['EmploymentIndustry'].median()
+teamDataCleaned_df[['EmploymentIndustry']] = teamDataCleaned_df[['EmploymentIndustry']].fillna(EmploymentIndustry_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['EmploymentIndustry'].describe())
+print('\n')
+print(worldData_df['EmploymentIndustry'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentIndustry'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['EmploymentIndustry'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+
+worldData_df['EmploymentIndustry'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('EmploymentIndustry')
+plt.show()
+
+worldData_df['EmploymentIndustry'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('EmploymentIndustry')
+plt.show()
+
+#15. Employment Services
+
+#We fill the missing value with the median
+
+EmploymentServices_median = teamDataCleaned_df['EmploymentServices'].median()
+teamDataCleaned_df[['EmploymentServices']] = teamDataCleaned_df[['EmploymentServices']].fillna(EmploymentServices_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['EmploymentServices'].describe())
+print('\n')
+print(worldData_df['EmploymentServices'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['EmploymentServices'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['EmploymentServices'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+worldData_df['EmploymentServices'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('EmploymentServices')
+plt.show()
+
+worldData_df['EmploymentServices'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('EmploymentServices')
+plt.show()
+
+#16. Employment Distribution (graph only)
+
+#Define graph size
+
+plt.figure(figsize =(12, 8))
+
+#Create Agriculture bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['EmploymentAgriculture'], color='#b5ffb9')
+#Create Industry Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['EmploymentIndustry'], color='#f9bc86', edgecolor='white', left=teamDataCleaned_df['EmploymentAgriculture'])
+#Create Services Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['EmploymentServices'], color='#a3acff', edgecolor='white', left=(teamDataCleaned_df['EmploymentAgriculture']+teamDataCleaned_df['EmploymentIndustry']))
+
+#Set legend
+
+legend=['Agriculture','Industry','Services']
+plt.legend(legend)
+
+plt.show()
+
+#17. Fertility Rate
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['FertilityRate'].describe())
+print('\n')
+print(worldData_df['FertilityRate'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['FertilityRate'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['FertilityRate'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+
+worldData_df['FertilityRate'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('FertilityRate')
+plt.show()
+
+worldData_df['FertilityRate'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('FertilityRate')
+plt.show()
+
+#18. GDP and GDP per Capita
+
+#Calculation of GDP per Capita
+
+teamDataCleaned_df['GDPCapita']=pd.DataFrame(teamData_df['GDP']/teamData_df['PopulationTotal'])
+
+#Bar chart for GDP
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP'])
+plt.title('GDP')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for GDP
+
+teamDataCleaned_df.hist(column=['GDP'], bins='sturges')
+plt.title('GDP')
+plt.show()
+
+#Bar chart for GDP per Capita
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDPCapita'])
+plt.title('GDP per Capita')
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram for GDP
+
+teamDataCleaned_df.hist(column=['GDPCapita'], bins='sturges')
+plt.title('GDP per Capita')
+plt.show()
+
+#19. GDP Growth
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['GDPGrowth'].describe())
+print('\n')
+print(worldData_df['GDPGrowth'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamData_df.index, height=teamData_df['GDPGrowth'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamData_df.hist(column=['GDPGrowth'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+
+worldData_df['GDPGrowth'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('GDPGrowth')
+plt.show()
+
+worldData_df['GDPGrowth'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('GDPGrowth')
+plt.show()
+
+#20. GDP Services
+
+#We complete the data for Poland found on research
+
+teamDataCleaned_df.loc['POL','GDP_Services']= 58.9
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['GDP_Services'].describe())
+print('\n')
+print(worldData_df['GDP_Services'][worldData_df['CountryName']=='World'])
+
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Services'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['GDP_Services'], bins='sturges')
+plt.show()
+
+#Histogram for Western Europe
+
+worldData_df['GDP_Services'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('GDP_Services')
+plt.show()
+
+#21. Armed Forces
+
+#Kosovo officially announced an army on 2018, therefore it should be zero
+
+teamDataCleaned_df['ArmedForces'] = teamDataCleaned_df['ArmedForces'].fillna(0)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['ArmedForces'].describe())
+print('\n')
+print(worldData_df['ArmedForces'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.title('Armed Forces - % of Total labor force')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['ArmedForces'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+teamDataCleaned_df.hist(column=['ArmedForces'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['ArmedForces'], bins='sturges')
+plt.title("Armed Forces - % of total labor force - Seaborn")
+plt.show()
+
+#22. GDP Industry
+
+#First we complete Poland's GDP Industry from research
+
+teamDataCleaned_df.loc['POL','GDP_Industry']= 38.4
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['GDP_Industry'].describe())
+print('\n')
+print(worldData_df['GDP_Industry'][worldData_df['CountryName']=='World'])
+
+#X-bar plot - Filled the gaps
+
+plt.title('Industry (% of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Industry'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['GDP_Industry'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+
+sns.distplot(teamDataCleaned_df['GDP_Industry'], bins='sturges')
+plt.title("Industry (% of GDP) - Seaborn")
+plt.show()
+
+#23. GDP Composition (graph only)
+
+#Define graph size
+
+plt.figure(figsize =(12, 8))
+
+#Create Agriculture bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['GDP_PrimaryActivities'], color='#b5ffb9')
+#Create Industry Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['GDP_Industry'], color='#f9bc86', edgecolor='white', left=teamDataCleaned_df['GDP_PrimaryActivities'])
+#Create Services Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['GDP_Services'], color='#a3acff', edgecolor='white', left=(teamDataCleaned_df['GDP_PrimaryActivities']+teamDataCleaned_df['GDP_Industry']))
+
+#Set legend
+
+legend=['Agriculture','Industry','Services']
+plt.legend(legend)
+plt.title('GDP Composition')
+
+plt.show()
+
+#24. Life Expectancy
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['LifeExpectancy'].describe())
+print('\n')
+print(worldData_df['LifeExpectancy'][worldData_df['CountryName']=='World'])
+
+#X-bar plot
+
+plt.title('Life Expectancy at Birth (in years)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['LifeExpectancy'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+teamDataCleaned_df.hist(column=['LifeExpectancy'], bins='sturges')
+plt.show()
+
+#Histogram for Western Europe
+
+worldData_df['LifeExpectancy'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('LifeExpectancy')
+plt.show()
+
+#25. GDP Merchandise
+
+#We fill the missing value for Kosovo with the mean of the lowest countries
+
+GDPMerch_mean = teamDataCleaned_df.loc[['FIN','GRC','NOR','SWE'],'GDP_Merchandise'].mean()
+teamDataCleaned_df['GDP_Merchandise'] = teamDataCleaned_df['GDP_Merchandise'].fillna(GDPMerch_mean)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['GDP_Merchandise'].describe())
+print('\n')
+print(worldData_df['GDP_Merchandise'][worldData_df['CountryName']=='World'])
+
+#X-bar plot
+
+plt.title('Merchandise Trade (% of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['GDP_Merchandise'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['GDP_Merchandise'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['GDP_Merchandise'], bins='sturges')
+plt.title("Merchandise Trade (% of GDP) - Seaborn")
+plt.show()
+
+#26. Military Expenditures
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['ExpendMilitary'].describe())
+print('\n')
+print(worldData_df['ExpendMilitary'][worldData_df['CountryName']=='World'])
+
+#X-bar plot
+
+plt.title('Military Expenditure( % of GDP)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['ExpendMilitary'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['ExpendMilitary'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+sns.distplot(teamDataCleaned_df['ExpendMilitary'], bins='sturges')
+plt.title("Military Expenditure( % of GDP) - Seaborn")
+plt.show()
+
+#27. Mobile Subscribers
+
+#We fill Kosovo with the median
+
+mobileSubs_median = teamDataCleaned_df['MobileSubs'].median()
+teamDataCleaned_df['MobileSubs'] = teamDataCleaned_df['MobileSubs'].fillna(mobileSubs_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['MobileSubs'].describe())
+print('\n')
+print(worldData_df['MobileSubs'][worldData_df['CountryName']=='World'])
+
+#X-bar plot
+
+plt.title('Mobile Subcribers (per 100 people)')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['MobileSubs'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['MobileSubs'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+
+sns.distplot(teamDataCleaned_df['MobileSubs'], bins='sturges')
+plt.title("Mobile Subcribers (per 100 people) - Seaborn")
+plt.show()
+
+#28. Poverty by Healthcare
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PovertyByHealthcare'].describe())
+print('\n')
+print(worldData_df['PovertyByHealthcare'][worldData_df['CountryName']=='World'])
+
+#X-bar plot
+plt.title('Below Poverty Line < $3.10')
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PovertyByHealthcare'])
+plt.xticks(ticks=teamDataCleaned_df.index, labels=teamDataCleaned_df['CountryName'],rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['PovertyByHealthcare'], bins='sturges')
+plt.show()
+
+#Seaborn plot
+
+sns.distplot(teamDataCleaned_df['PovertyByHealthcare'], bins='sturges')
+plt.title("Below Poverty Line < $3.10 - Seaborn")
+plt.show()
+
+#29. Population Growth
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationGrowth'].describe())
+print('\n')
+print(worldData_df['PopulationGrowth'][worldData_df['CountryName']=='World'])
+
+
+#X-bar plot
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationGrowth'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram Plot
+
+teamDataCleaned_df.hist(column=['PopulationGrowth'], bins='sturges')
+plt.show()
+
+#30. PopulationDensity
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationDensity'].describe())
+print('\n')
+print(worldData_df['PopulationDensity'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationDensity'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['PopulationDensity'], bins='sturges')
+plt.show()
+
+#31. Population65+
+
+#We complete Kosovo with the median
+
+population65_median = round(teamDataCleaned_df['Population65+'].median())
+teamDataCleaned_df['Population65+'] = teamDataCleaned_df['Population65+'].fillna(population65_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['Population65+'].describe())
+print('\n')
+print(worldData_df['Population65+'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['Population65+'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['Population65+'], bins='sturges')
+plt.show()
+
+#32. Population15_64
+
+#We complete Kosovo with the median
+
+population15_64_median = round(teamDataCleaned_df['Population15_64'].median())
+teamDataCleaned_df['Population15_64'] = teamDataCleaned_df['Population15_64'].fillna(population15_64_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['Population15_64'].describe())
+print('\n')
+print(worldData_df['Population15_64'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['Population15_64'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['Population15_64'], bins='sturges')
+plt.show()
+
+#33. Population0_14
+
+#We complete Kosovo with the median
+
+population0_14_median = round(teamDataCleaned_df['Population0_14'].median())
+teamDataCleaned_df['Population0_14'] = teamDataCleaned_df['Population0_14'].fillna(population0_14_median)
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['Population0_14'].describe())
+print('\n')
+print(worldData_df['Population0_14'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['Population0_14'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['Population0_14'], bins='sturges')
+plt.show()
+
+#34. Population Age Distribution (graph only)
+
+#Define graph size
+
+plt.figure(figsize =(12, 8))
+
+#Create 0-14 bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['Population0_14'], color='#b5ffb9')
+#Create 15-64 Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['Population15_64'], color='#f9bc86', edgecolor='white', left=teamDataCleaned_df['Population0_14'])
+#Create 65+ Bar
+plt.barh(y=teamDataCleaned_df.index, width=teamDataCleaned_df['Population65+'], color='#a3acff', edgecolor='white', left=(teamDataCleaned_df['Population0_14']+teamDataCleaned_df['Population15_64']))
+
+#Set legend
+
+legend=['0 - 14','15 - 64','65+']
+plt.legend(legend)
+plt.title('Age Distribution')
+
+plt.show()
+
+#35. Undernourishment
+
+#Kosovo is missing but most countries seem to report the same vaues for undernourishment
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['Undernourishment'].describe())
+print('\n')
+print(worldData_df['Undernourishment'][worldData_df['CountryName']=='World'])
+
+#Bar Chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['Undernourishment'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['Undernourishment'], bins='sturges')
+plt.show()
+
+#36. Population Rural
+
+#We fill Kosovo with the median
+
+kosovo_median_PopulationRural= teamDataCleaned_df['PopulationRural'].median()
+teamDataCleaned_df.loc['XKX','PopulationRural']=kosovo_median_PopulationRural
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationRural'].describe())
+print('\n')
+print(worldData_df['PopulationRural'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationRural'])
+plt.xticks(rotation=90)
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['PopulationRural'], bins='sturges')
+plt.show()
+
+#37. Surface Area
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['SurfaceArea'].describe())
+print('\n')
+print(worldData_df['SurfaceArea'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['SurfaceArea'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['SurfaceArea'], bins='sturges')
+plt.show()
+
+#38. Tax Revenue GDP
+
+#Serbia, Montenegro and Kosovo have missing values and all were one country some years ago
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['TaxRevenue'].describe())
+print('\n')
+print(worldData_df['TaxRevenue'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['TaxRevenue'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['TaxRevenue'], bins='sturges')
+plt.show()
+
+#Adding histograms for Western Europe and the Rest of the World
+
+worldData_df['TaxRevenue'][worldData_df['Cool Name']=='Jetfire'].hist(bins='sturges')
+plt.title('Western Europe')
+plt.xlabel('% Tax Revenue from GDP')
+plt.show()
+
+worldData_df['TaxRevenue'][worldData_df['CountryName']!='World'][worldData_df['Cool Name']!='Skids & Mudflap'].hist(bins='sturges')
+plt.title('Rest of the World')
+plt.xlabel('% Tax Revenue from GDP')
+plt.show()
+
+#39. Population Urban
+
+#We fill Kosovo with the median
+
+kosovo_median_PopulationUrban= teamDataCleaned_df['PopulationUrban'].median()
+teamDataCleaned_df.loc['XKX','PopulationUrban']=kosovo_median_PopulationUrban
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationUrban'].describe())
+print('\n')
+print(worldData_df['PopulationUrban'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationUrban'])
+plt.xticks(rotation=90)
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['PopulationUrban'], bins='sturges')
+plt.show()
+
+#40. Population Urban Growth
+
+#Description of the variable and World average
+
+print(teamDataCleaned_df['PopulationUrbanGrowth'].describe())
+print('\n')
+print(worldData_df['PopulationUrbanGrowth'][worldData_df['CountryName']=='World'])
+
+#Bar chart
+
+plt.bar(x=teamDataCleaned_df.index, height=teamDataCleaned_df['PopulationUrbanGrowth'])
+plt.xticks(rotation=90)
+plt.show()
+
+#Histogram
+
+teamDataCleaned_df.hist(column=['PopulationUrbanGrowth'], bins='sturges')
+plt.show()
+
+######################################################################################################################
+                                                #Correlation Matrix
+######################################################################################################################
+
+correlationData_df=teamDataCleaned_df.dropna(axis=1, thresh=15).corr().dropna(thresh=1).dropna(axis=1, thresh=15)
+f = plt.figure(figsize=(19, 15))
+plt.matshow(correlationData_df, fignum=f.number)
+plt.xticks(range(correlationData_df.shape[1]), correlationData_df.columns, fontsize=14, rotation=90)
+plt.yticks(range(correlationData_df.shape[1]), correlationData_df.columns, fontsize=14)
+plt.grid(True)
+cb = plt.colorbar()
+cb.ax.tick_params(labelsize=14)
